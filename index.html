@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Age Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #7d5fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="date"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #7d5fff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .result {
+      display: flex;
+      margin-top: 40px;
+      gap: 20px;
+    }
+
+    .box {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 100px;
+      font-weight: bold;
+      box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .box span {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AGE CALCULATOR</h1>
+
+  <div class="container">
+    <input type="date" id="birthdate" />
+    <button onclick="calculateAge()">Calculator</button>
+  </div>
+
+  <div class="result">
+    <div class="box">
+      <span id="years">00</span>
+      YEAR
+    </div>
+    <div class="box">
+      <span id="months">00</span>
+      MONTH
+    </div>
+    <div class="box">
+      <span id="days">00</span>
+      DAY
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const birthInput = document.getElementById("birthdate").value;
+      const birthDate = new Date(birthInput);
+      const today = new Date();
+
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById("years").textContent = years.toString().padStart(2, "0");
+      document.getElementById("months").textContent = months.toString().padStart(2, "0");
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+    }
+  </script>
+
+</body>
+</html>
